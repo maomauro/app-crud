@@ -8,7 +8,17 @@
             </div>
         @endif
 
-        <a href="{{ url('persona/create') }}" class="btn btn-success">Crear Persona</a>
+        <div class="d-md-flex justify-content-md-end">
+            <form class="row g-3" action="{{ url('/persona') }}" method="GET">
+                <div class="btn-group">
+                    <input type="text" name="buscar" class="form-control">
+                    <input type="submit" value="Buscar por Nombre" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+        <div>
+            <a href="{{ url('persona/create') }}" class="btn btn-success">Crear Persona</a>
+        </div>
         <hr />
         <table class="table table-responsive table-striped">
             <thead class="thead-light">

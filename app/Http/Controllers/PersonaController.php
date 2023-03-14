@@ -13,8 +13,10 @@ class PersonaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //var_dump($request);
+        $busqueda = $request->buscar;
         $datos = DB::table('personas')
                 ->select(   'personas.id',
                             'personas.nombre',
@@ -31,10 +33,13 @@ class PersonaController extends Controller
                 ->join  (   'categorias',
                             'categorias.id', '=', 'personas.categoriaId'
                         )
+                ->where   ('personas.nombre','LIKE','%'. $busqueda . '%')
                 ->paginate(5);
 
+
+
         //$datos["personas"]=Persona::paginate(5);
-        return view('persona.index', ['personas' => $datos]);
+        return view('persona.index', ['personas' => $datos, 'busqueda'=>$busqueda]);
     }
 
     /**
